@@ -1,0 +1,12 @@
+/tester
+tester
+/node_modules
+node_modules
+
+/docs
+docs
+
+jsdoc.json
+./jsdoc.json
+
+.npmignore

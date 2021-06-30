@@ -1,0 +1,27 @@
+{
+  "name": "jiosavan",
+  "version": "1.0.0",
+  "description": "Unofficial SDK to interact with jio savan api",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sarthak090/jiosavan-api.git"
+  },
+  "keywords": [
+    "jiosavan",
+    "savan-music",
+    "jio-music"
+  ],
+  "author": "Sarthak Kaushik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sarthak090/jiosavan-api/issues"
+  },
+  "homepage": "https://github.com/sarthak090/jiosavan-api#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
+}
