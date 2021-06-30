@@ -2,7 +2,7 @@
   "name": "jiosavan",
   "version": "1.0.0",
   "description": "Unofficial SDK to interact with jio savan api",
-  "main": "app.js",
+  "main": "src/index",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
