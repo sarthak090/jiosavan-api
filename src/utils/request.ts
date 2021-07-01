@@ -1,22 +1,15 @@
-const fetchData = require("node-fetch");
+const fetchData = require('node-fetch');
 /**
  *
  * @param {string} url url to request
  * @returns {Promise} returns promise containing the required data
  */
-const request = async (url) => {
+const requestUrl = async (url: string) => {
   return new Promise(async (resolve, reject) => {
     try {
       const response = await fetchData(url);
-      const data = await response.json();
-
-      // if (data && data.title == null) {
-      //   return reject({
-      //     status: 404,
-      //     msg: `No data found please check`,
-      //   });
-      // }
-      if (data.length > 0 || typeof data == "object") {
+      const data: any = await response.json();
+      if (data.length > 0 || typeof data == 'object') {
         resolve(data);
       } else {
         reject({
@@ -30,4 +23,4 @@ const request = async (url) => {
   });
 };
 
-module.exports = request;
+export default requestUrl;
