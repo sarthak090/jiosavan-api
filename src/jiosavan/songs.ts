@@ -1,19 +1,20 @@
 import formatter from '../utils/formatter';
-
 import request from '../utils/request';
-
 import endpoints from '../utils/endpoints';
+import { Album, Lyrics, SongDetails, Playlist } from '../interfaces/Songs';
+
 /**
  *
  * @param {string} id id of the song
  * @param {boolean} lyrics true or false
  * @returns songs data with lyrics
  */
-const getSong = async (id: string, lyrics: boolean) => {
+const getSong = async (id: string, lyrics?: boolean): Promise<SongDetails> => {
   try {
+    const ly = lyrics ? lyrics : false;
     const song: any = await request(endpoints.songDetailsBaseUrl + id);
-
-    return formatter.songResponse(song[id], lyrics);
+    const formattedRes: any = formatter.songResponse(song[id], ly);
+    return formattedRes;
   } catch (err) {
     return err;
   }
@@ -23,9 +24,11 @@ const getSong = async (id: string, lyrics: boolean) => {
  * @param {string} id id of the song
  * @returns lyrics of the song
  */
-const getLyrics = async (id: string) => {
+const getLyrics = async (id: string): Promise<Lyrics> => {
   try {
-    return await request(endpoints.lyricsBaseUrl + id);
+    const song: any = await request(endpoints.lyricsBaseUrl + id);
+
+    return song;
   } catch (err) {
     return err;
   }
@@ -37,16 +40,14 @@ const getLyrics = async (id: string) => {
  * @param {boolean} lyrics true or false
  * @returns album data
  */
-interface IResponseAlbum {
-  id?: string;
-  image?: string;
-  primary_artists?: string;
-  // songs?: IResponse[];
-}
-const getAlbum = async (id: string, lyrics: boolean) => {
+
+const getAlbum = async (id: string, lyrics?: boolean): Promise<Album> => {
   try {
-    const albumData: IResponseAlbum | any = await request(endpoints.albumDetailsBaseUrl + id);
-    return formatter.albumResponse(albumData, lyrics);
+    const ly = lyrics ? lyrics : false;
+
+    const albumData: any = await request(endpoints.albumDetailsBaseUrl + id);
+    const formattedRes: any = formatter.albumResponse(albumData, ly);
+    return formattedRes;
   } catch (err) {
     return err;
   }
@@ -57,24 +58,14 @@ const getAlbum = async (id: string, lyrics: boolean) => {
  * @param {boolean} lyrics true or false
  * @returns  playlist data
  */
-interface IResponse {
-  id: string;
-  media_preview_url: string;
-  primary_artists: string;
-  singers: string;
-  starring: string;
-  has_lyrics: string;
-}
-interface IResponsePlaylist {
-  listid?: string;
-  listname: string;
-  songs: IResponse[];
-}
-const getPlaylist = async (id: string, lyrics: boolean) => {
-  try {
-    const albumData: IResponsePlaylist | any = await request(endpoints.playlistDetailsBaseUrl + id);
 
-    return formatter.playListResponse(albumData, lyrics);
+const getPlaylist = async (id: string, lyrics?: boolean): Promise<Playlist> => {
+  try {
+    const ly = lyrics ? lyrics : false;
+
+    const albumData: any = await request(endpoints.playlistDetailsBaseUrl + id);
+    const formattedRes = formatter.playListResponse(albumData, ly);
+    return formattedRes;
   } catch (err) {
     return err;
   }

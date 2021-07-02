@@ -1,3 +1,5 @@
+/* tslint:disable:no-string-literal */
+
 import { lyricsBaseUrl } from './endpoints';
 import requestToUrl from './request';
 
@@ -51,7 +53,7 @@ const albumResponse = async (resp: IResponseAlbum, lyrics: boolean) => {
   if (resp.songs !== undefined) {
     sendResp['songs'] = await Promise.all(
       resp['songs'].map(async (song: any) => {
-        let data = await songFormatAsync(song, lyrics);
+        const data = await songFormatAsync(song, lyrics);
         return data;
       }),
     );
@@ -76,7 +78,7 @@ const playListResponse = async (resp: IResponsePlaylist, lyrics: boolean) => {
   // console.log(sendResp);
   sendResp['songs'] = await Promise.all(
     resp['songs'].map(async (song) => {
-      let data = await songFormatAsync(song, lyrics);
+      const data = await songFormatAsync(song, lyrics);
       return data;
     }),
   );
@@ -96,7 +98,7 @@ const songFormatAsync = async (resp: IResponse, lyrics: boolean) => {
 
   sendResp['singers'] = formatData(resp['singers']);
   sendResp['starring'] = formatData(resp['starring']);
-  if (lyrics == true && resp.has_lyrics == 'true') {
+  if (lyrics === true && resp.has_lyrics === 'true') {
     const lyr = await requestToUrl(lyricsBaseUrl + resp.id);
     sendResp.lyricsData = lyr;
     return sendResp;

@@ -1,4 +1,4 @@
-const fetchData = require('node-fetch');
+import fetchData from 'node-fetch';
 /**
  *
  * @param {string} url url to request
@@ -9,7 +9,7 @@ const requestUrl = async (url: string) => {
     try {
       const response = await fetchData(url);
       const data: any = await response.json();
-      if (data.length > 0 || typeof data == 'object') {
+      if (data.length > 0 || typeof data === 'object') {
         resolve(data);
       } else {
         reject({
