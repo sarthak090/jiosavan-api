@@ -1,8 +1,3 @@
-// const songsMethods: object = require('./songs');
-// let methods = {
-//   ...searchMethods,
-//   ...songsMethods,
-// };
 import songsMethods from './songs';
 import searchMethods from './search';
 

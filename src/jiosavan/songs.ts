@@ -19,6 +19,18 @@ const getSong = async (id: string, lyrics?: boolean): Promise<SongDetails> => {
     return err;
   }
 };
+const getSongs = async (ids: string[], lyrics?: boolean): Promise<SongDetails[]> => {
+  try {
+    const ly = lyrics ? lyrics : false;
+    const allResponses: any = ids.map(async (id) => getSong(id, ly));
+    return allResponses;
+    // const song: any = await request(endpoints.songDetailsBaseUrl + id);
+    // const formattedRes: any = formatter.songResponse(song[id], ly);
+    // return formattedRes;
+  } catch (err) {
+    return err;
+  }
+};
 /**
  *
  * @param {string} id id of the song
@@ -75,4 +87,5 @@ export default {
   getLyrics,
   getAlbum,
   getPlaylist,
+  getSongs,
 };
