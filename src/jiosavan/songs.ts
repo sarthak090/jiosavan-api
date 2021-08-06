@@ -22,11 +22,9 @@ const getSong = async (id: string, lyrics?: boolean): Promise<SongDetails> => {
 const getSongs = async (ids: string[], lyrics?: boolean): Promise<SongDetails[]> => {
   try {
     const ly = lyrics ? lyrics : false;
-    const allResponses: any = ids.map(async (id) => getSong(id, ly));
+    const allResponses: any = await Promise.all(ids.map((id) => getSong(id, ly).then((r) => r)));
+
     return allResponses;
-    // const song: any = await request(endpoints.songDetailsBaseUrl + id);
-    // const formattedRes: any = formatter.songResponse(song[id], ly);
-    // return formattedRes;
   } catch (err) {
     return err;
   }
